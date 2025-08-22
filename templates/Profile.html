@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PYPYPER</title>
+    <link href="{% static 'profile/css/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'profile/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'profile/styles/main.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'myfile/style.css' %}">
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li><a href="/index">Home</a></li>
+                                <li><a href="/map/list">List</a></li>
+                                {% if not user.is_superuser %}
+                                <li><a href="/map/report">Navigations</a></li>
+                                {% endif %}
+                                {% if user.is_superuser %}
+                                <li><a href="">Reports</a></li>
+                                <li><a href="#">Edits</a>
+                                    <ul class="dropdown">
+                                        <li><a href="map/edit">Home Page</a></li>
+                                        <li><a href="./listing-details.html">Lists</a></li>
+                                        <li><a href="./blog-details.html">Users</a></li>
+                                        <li><a href="./contact.html">Earnings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/map/user_detail">Users</a></li>
+                                
+                                {% else %}
+                                <li class="active"><a href="/map/profile">Profile</a></li>
+                                {% endif %}
+                                <li><a href="#">About US</a></li>
+                                <li><a href="/users/logout">Logout</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__menu__right">
+                            <a href="/map/upload" class="primary-btn"><i class="fa fa-upload"></i> Add</a>
+                            <a href="/map/register" class="login-btn"><i class="fa fa-user"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <div class="profile-page">
+      <div class="wrapper">
+        <div class="page-header page-header-small" filter-color="green">
+          <div class="page-header-image" data-parallax="true" style="background-image: url();"></div>
+          <div class="container">
+            <div class="content-center">
+              {% for p in detail %}
+                {% if p.money == user.id %}
+                  <div class="cc-profile-image"><img src="{{p.mental.url}}" alt="Image"/></div>
+                {% endif %}
+              {% endfor %}
+              <div>
+                <h2 style="color: white">{{user.first_name}}</h2>
+                <br>
+                <a href="/map/update" class="primary-btn" id="camera"><i class="fa fa-camera"></i> Change Your Photo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="about">
+      <div class="container">
+        <div class="card" data-aos="fade-up" data-aos-offset="10">
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <div class="card-body">
+                <div class="h4 mt-0 title">About</div>
+                <p></p>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="card-body">
+                <div class="h4 mt-0 title">Basic Information</div>
+                <div class="row">
+                  <div class="col-sm-4"><strong class="text-uppercase">First_name: </strong></div>
+                  <div class="col-sm-8">{{user.first_name}}</div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-sm-4"><strong class="text-uppercase">Last_name: </strong></div>
+                  <div class="col-sm-8">{{user.Last_name}}</div>
+                </div>                
+                <div class="row mt-3">
+                  <div class="col-sm-4"><strong class="text-uppercase">Email:</strong></div>
+                  <div class="col-sm-8">{{user.email}}</div>
+                </div>                
+                <div class="row mt-3">
+                  <div class="col-sm-4"><strong class="text-uppercase">User_name:</strong></div>
+                  <div class="col-sm-8">{{user.username}}</div>
+                </div>
+                {% for m in INFO %}
+                <div class="row mt-3">
+                  <div class="col-sm-4"><strong class="text-uppercase">Main Town:</strong></div>
+                  <div class="col-sm-8">{{m.live}}</div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-sm-4"><strong class="text-uppercase">living:</strong></div>
+                  <div class="col-sm-8"></div>
+                </div>
+                {% endfor %}
+                    <form action="/map/update" id="form" method="POST">
+                      {% csrf_token %}
+                       <button class="primary-btn" id="btn" name="btn" value="{{user.username}}">Update your profile</button>                      
+                    </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section" id="skill">
+      <div class="container">
+        <div class="h4 text-center mb-4 title">Professional Skills</div>
+        <div class="card" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">HTML</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div><span class="progress-value">80%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">CSS</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div><span class="progress-value">75%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">JavaScript</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{user.id}}%;"></div><span class="progress-value">60%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">SASS</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div><span class="progress-value">60%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">Bootstrap</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div><span class="progress-value">75%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="progress-container progress-primary"><span class="progress-badge">Photoshop</span>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-primary" data-aos="progress-full" data-aos-offset="10" data-aos-duration="2000" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{user.id}}%;"></div><span class="progress-value">{{user.id}}%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer__about">
+                        <p>Challenging the way things have always been done can lead to creative new options that reward
+                            you.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1 col-md-6">
+                    <div class="footer__address">
+                        <ul>
+                            <li>
+                                <span>Call Us:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Email:</span>
+                                <p>{{user.email}}</p>
+                            </li>
+                            <li>
+                                <span>Fax:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Connect Us:</span>
+                                <div class="footer__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-skype"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>            
+                    <div class="col-lg-3 offset-lg-1 col-md-6">
+                        <div class="footer__widget">
+                            {% if user.is_superuser %}
+                            <a href="/map/edit" class="primary-btn" id="edit"><i class="fa fa-edit"></i></a>
+                            {% endif %}                            
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved|</p>
+                        </div>
+                        <div class="footer__copyright__links">
+                            <a href="#">Terms</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>    
+
+    <script src="{% static 'profile/js/core/jquery.3.2.1.min.js' %}"></script>
+    <script src="{% static 'profile/js/core/popper.min.js' %}"></script>
+    <script src="{% static 'profile/js/core/bootstrap.min.js' %}"></script>
+    <script src="{% static 'profile/js/now-ui-kit.js' %}?v=1.1.0"></script>
+    <script src="{% static 'profile/js/aos.js' %}"></script>
+    <script src="{% static 'profile/scripts/main.js' %}"></script>
+  </body>
+</html>

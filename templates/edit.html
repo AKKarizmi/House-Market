@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>PYPYPER</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'add/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'add/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'add/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'add/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'add/css/main.css' %}" rel="stylesheet" media="all">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">   
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">Add House to database</h2>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{message.tag}} m-2" id="msg" role="alert">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="card-body">
+                    <form method="GET" action="/users/update" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="name">First data</div>
+                            <div class="value">                                    
+                                <input type="file" name="photo">
+                            </div>
+                            <br>
+<!--                             <div class="name">Second data</div>    
+                            <div class="value">
+                                <select name="data_1">
+                                    <optgroup title="Choose Location">
+                                        <option value="">Choose Location</option>
+                                        {% for l in data %}
+                                        <option>{{l.location}}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="name">Third data</div>
+                            <div class="value">    
+                                <select name="data_2">
+                                    <optgroup title="Choose Location">
+                                        <option value="">Choose Location</option>
+                                        {% for l in data %}
+                                        <option>{{l.location}}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="name">Fourth data</div>
+                            <div class="value">
+                                <select name="data_3">
+                                    <optgroup title="Choose Location">
+                                        <option value="">Choose Location</option>
+                                        {% for l in data %}
+                                        <option>{{l.location}}</option>
+                                        {% endfor %}
+                                    </optgroup>
+                                </select>
+                            </div> -->
+                        </div>
+                        <div>
+                            <button class="btn btn--radius-2 btn--red" type="submit" value="{{user.id}}" name="user">ADD</button>
+                        </div>
+                        <a href="/index" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30" style="float: right;">
+                            Home
+                            <i class="fa fa-long-arrow-right m-l-5"></i>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'add/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'add/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'add/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'add/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'add/js/global.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'js/jquery.barfiller.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

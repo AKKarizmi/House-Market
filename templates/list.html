@@ -1,0 +1,249 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Directing Template">
+    <meta name="keywords" content="Directing, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PYPYPER</title>
+
+    <!-- Google Font -->
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/barfiller.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'myfile/style.css' %}">
+</head>
+
+<body class="ov-hid">
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header header--normal">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="{% static 'img/footer-logo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li><a href="/index">Home</a></li>
+                                <li class="active"><a href="./list">List</a></li>
+                                <li><a href="#">Earns</a></li>
+                                {% if user.is_superuser %}
+                                <li><a href="#">Edits</a>
+                                    <ul class="dropdown">
+                                        <li><a href="map/edit">Home Page</a></li>
+                                        <li><a href="./listing-details.html">Lists</a></li>
+                                        <li><a href="./blog-details.html">Users</a></li>
+                                        <li><a href="./contact.html">Earnings</a></li>
+                                    </ul>
+                                </li>
+                                {% endif %}
+                                {% if user.is_superuser %}
+                                <li><a href="/map/user_detail">Users</a></li>
+                                {% else %}
+                                <li><a href="./blog.html">Profile</a></li>
+                                {% endif %}
+                                <li><a href="#">About US</a></li>
+                                <li><a href="/users/logout">Logout</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__menu__right">
+                            <a href="/admin/home/house/add/" class="primary-btn"><i class="fa fa-upload"></i> Add</a>
+                            <a href="/map/register" class="login-btn"><i class="fa fa-user"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Filter Begin -->
+    <div class="filter nice-scroll">
+        <div class="filter__title">
+            <h5><i class="fa fa-filter"></i> Filter</h5>
+        </div>
+        <br>
+        <form>
+        <div class="filter__select">
+            <select>
+                <option value="">All</option>
+                {% for i in home %}
+                <option>{{i.location}}</option>
+                {% endfor %}
+            </select>
+        </div><!-- 
+        <div class="filter__tags">
+            <h6>Tag</h6>
+            <label for="coupon">
+                Floor
+                <input type="checkbox" id="coupon">
+                <span class="checkmark"></span>
+            </label>
+            <label for="sa">
+                Air Filter
+                <input type="checkbox" id="sa">
+                <span class="checkmark"></span>
+            </label>
+            <label for="camping">
+                Hot burn
+                <input type="checkbox" id="camping">
+                <span class="checkmark"></span>
+            </label>
+            <label for="hot-spots">
+                WI-FI
+                <input type="checkbox" id="hot-spots">
+                <span class="checkmark"></span>
+            </label>
+            <label for="internet">
+                Pet Allowed
+                <input type="checkbox" id="internet">
+                <span class="checkmark"></span>
+            </label>
+            <label for="tr">
+                is near to street
+                <input type="checkbox" id="tr">
+                <span class="checkmark"></span>
+            </label>
+            <label for="hd">
+                allowed for 9 persons 
+                <input type="checkbox" id="hd">
+                <span class="checkmark"></span>
+            </label> -->
+        <!-- </div> -->
+        <div class="filter__btns">
+            <button type="submit">Filter Results</button>
+            <button type="submit" class="filter__reset">Reset All</button>
+        </div>
+        </form>
+    </div>
+    <!-- Filter End -->
+
+    <!-- Listing Section Begin -->
+    <section class="nice-scroll" style="padding-top: 130px">
+        {% for i in home %}
+            <div class="col-lg-4 col-md-6" style="display: inline-block; width: 330px">
+                <div class="blog__item">
+                    <div class="blog__item__pic set-bg" data-setbg="{{i.image.url}}">
+                        <form action="/show_all">
+                            <button type="submit" class="primary-btn" name="input" value="{{i.id}}" id="btn" style="margin-top: 160px; margin-left: 240px">Big view</button>
+                        </form>
+                    </div>
+                        <div class="blog__item__text">
+                            <ul class="blog__item__tags">
+                                <li><i class="fa fa-tags"></i>{{i.price}} AFS</li>
+                            </ul>
+                            <ul class="blog__item__widget">
+                                <li><i class="icon_phone"></i>{{i.phone}}</li>
+                                <br><br>
+                                {% if user.is_superuser %}
+                                <li><form action="/delete"><button type="submit" class="primary-btn" id="delete" name="delete" value="{{i.id}}"><i class="fa fa-remove"></i>Delete</button></form></li>
+                                <li><form action="/sell"><button type="submit" class="primary-btn" id="sell" name="sell" value="{{i.id}}"><i class="fa fa-download"></i>Sell</button></form></li>
+                                {% else %}
+                                <li><i class="fa fa-user"></i>{{i.owner}}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </section>
+    <!-- Listing Section End -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer__about">
+                        <p>Challenging the way things have always been done can lead to creative new options that reward
+                            you.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1 col-md-6">
+                    <div class="footer__address">
+                        <ul>
+                            <li>
+                                <span>Call Us:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Email:</span>
+                                <p>{{user.email}}</p>
+                            </li>
+                            <li>
+                                <span>Fax:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Connect Us:</span>
+                                <div class="footer__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-skype"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>            
+                    <div class="col-lg-3 offset-lg-1 col-md-6">
+                        <div class="footer__widget">
+                            {% if user.is_superuser %}
+                            <a href="/map/edit" class="primary-btn" id="edit"><i class="fa fa-edit"></i></a>
+                            {% endif %}                            
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved|</p>
+                        </div>
+                        <div class="footer__copyright__links">
+                            <a href="#">Terms</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'js/jquery.barfiller.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

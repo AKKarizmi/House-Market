@@ -1,0 +1,18 @@
+#btn{
+	margin-top: 170px; margin-left: 280px; padding: 10px; font-size: 10px; border: 0px; background-color: #3399FF
+}
+#delete{
+	padding: 10px; font-size: 10px; border: 0px
+}
+#sell{
+	padding: 10px; font-size: 10px; background-color: green; border: 0px
+}
+#edit{
+	float: right; background-color: blue; margin-bottom: 15px; border: 0px; 
+}
+#header{
+	background-color: currentColor;
+}
+#camera{
+	background-color: green; border: 0px
+}

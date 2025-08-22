@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Directing Template">
+    <meta name="keywords" content="Directing, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PYPYPER</title>
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/barfiller.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li><a href="/index">Home</a></li>
+                                <li><a href="/map/list">List</a></li>
+                                <li><a href="">Reports</a></li>
+                                <li><a href="#">Edits</a>
+                                    <ul class="dropdown">
+                                        <li><a href="map/edit">Home Page</a></li>
+                                        <li><a href="./listing-details.html">Lists</a></li>
+                                        <li><a href="./blog-details.html">Users</a></li>
+                                        <li><a href="./contact.html">Earnings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/map/user_detail">Users</a></li>
+                                <li><a href="#">About US</a></li>
+                                <li><a href="/users/logout">Logout</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__menu__right">
+                            <a href="/admin/home/house/add/" class="primary-btn"><i class="fa fa-upload"></i> Add</a>
+                            <a href="/map/register" class="login-btn"><i class="fa fa-user"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-area set-bg" data-setbg="{% static 'img/breadcrumb/breadcrumb-normal.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- User_Detail -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    {% for u in user %}
+                    {% if not u.is_superuser %}
+                    <div class="blog__item__large" style="width: 1150px;">
+                        {% for p in detail %}
+                            {% if p.money == u.id %}
+                                <div class="blog__item__pic set-bg" data-setbg="{{p.mental.url}}" style="height: 500px">
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="blog__item__text">
+                            <ul class="blog__item__tags">
+                                <li>ID: {{u.id}}</li>
+                            </ul>
+                            <h3>First_name: {{u.first_name}}</h3>
+                            <ul class="blog__item__widget">
+                                <li>Email: {{u.email}}</li>
+                                <li><i class="fa fa-user"></i>{{u.username}}</li>
+                            </ul>
+                            <p>About {{u.first_name}} :</p>
+                            <p></p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>    
+    <!-- EndUser -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer__about">
+                        <div class="footer__about__logo">
+                            <a href="./index.html"><img src="{% static 'img/footer-logo.png' %}" alt=""></a>
+                        </div>
+                        <p>Challenging the way things have always been done can lead to creative new options that reward
+                            you.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1 col-md-6">
+                    <div class="footer__address">
+                        <ul>
+                            <li>
+                                <span>Call Us:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Email:</span>
+                                <p>info.colorlib@gmail .com</p>
+                            </li>
+                            <li>
+                                <span>Fax:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Connect Us:</span>
+                                <div class="footer__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-skype"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        </div>
+                        <div class="footer__copyright__links">
+                            <a href="#">Terms</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'js/jquery.barfiller.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

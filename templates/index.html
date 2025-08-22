@@ -1,0 +1,755 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Directing Template">
+    <meta name="keywords" content="Directing, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PYPYPER</title>
+
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="#" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'slide/css/bootstrap.min.css' %}" />
+    <!-- Pogo Slider CSS -->
+    <link rel="stylesheet" href="{% static 'slide/css/pogo-slider.min.css' %}" />
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'slide/css/style.css' %}" />
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'slide/css/responsive.css' %}" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'slide/css/custom.css' %}" />
+    <!-- alerts -->
+    <link rel="stylesheet" href="{% static 'alert/clear-sans/stylesheet.css' %}" />
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.019/css/hack.min.css' %}" /> -->
+    <!-- <link rel="stylesheet" href="{% static 'alert/css/examples.css' %}" /> -->
+    <link rel="stylesheet" href="{% static 'alert/css/jquery.sweet-modal.min.css' %}" />
+    <!-- endalert -->
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/barfiller.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'myfile/style.css' %}">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li class="active"><a href="./index.html">Home</a></li>
+                                <li><a href="/map/list">List</a></li>
+                                {% if not user.is_superuser %}
+                                <li><a href="/map/report">Navigations</a></li>
+                                {% endif %}
+                                {% if user.is_superuser %}
+                                <li><a href="">Reports</a></li>
+                                <li><a href="#">Edits</a>
+                                    <ul class="dropdown">
+                                        <li><a href="map/edit">Home Page</a></li>
+                                        <li><a href="./listing-details.html">Lists</a></li>
+                                        <li><a href="./blog-details.html">Users</a></li>
+                                        <li><a href="./contact.html">Earnings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/map/user_detail">Users</a></li>
+                                
+                                {% else %}
+                                <li><a href="/map/profile">Profile</a></li>
+                                {% endif %}
+                                <li><a href="#">About US</a></li>
+                                <li><a href="/users/logout">Logout</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__menu__right">
+                            <a href="/map/upload" class="primary-btn"><i class="fa fa-upload"></i> Add</a>
+                            <a href="/map/register" class="login-btn"><i class="fa fa-user"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+    {% block content %}
+    <section class="hero set-bg" data-setbg="{% static 'img/home_slider.jpg' %}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="hero__text">
+                        <div class="section-title">
+                            <h2>Discover The Best Services Near You</h2>
+                            <p>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="blog__item__tags" id="msg" role="alert">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}    
+                            {% endif %}
+                            </p>
+                        </div>
+                        <div class="hero__search__form">
+                            <form action="/search" method="GET">
+                                <div class="select__option">
+                                    <select name="location">
+                                        <optgroup title="Choose Location">
+                                            <option value="">Choose Location</option>
+                                            {% for l in home %}
+                                            <option>{{l.location}}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="select__option">
+                                    <select name="rooms">
+                                        <optgroup title="Choose Room">
+                                            <option value="">Choose Rooms</option>
+                                            {% for r in home %}
+                                            <option>{{r.rooms}}</option>
+                                            {% endfor %}
+                                        </optgroup>                                        
+                                    </select>
+                                </div>
+                                <div class="select__option">
+                                    <select name="price">
+                                        <optgroup title="Choose Price">
+                                            <option value="">Choose Price</option>
+                                            {% for p in home %}
+                                            <option>{{p.price}}</option>
+                                            {% endfor %}
+                                        </optgroup>                                        
+                                    </select>
+                                </div>
+                                <button type="submit" style="width: 350px">Explore</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+    <!-- Hero Section End -->
+<br>
+<hr>
+<br>
+    <!-- Most Search Section Begin -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>The Most Searched Services</h2>                                    
+                        <p>Travelocity empowers travelers who are giving back on their trips in ways big and small</p>
+                    </div>
+                </div>
+            </div>
+            {% for i in home %}
+            <div class="col-lg-4 col-md-6" style="display: inline-block; width: 410px;">
+                <div class="blog__item">               
+                    <div class="blog__item__pic set-bg" data-setbg="{{i.image.url}}">
+                        <form action="/show_all">
+                            <button type="submit" class="primary-btn" name="input" value="{{i.id}}" id="btn">Big view</button>
+                        </form>
+                    </div>
+                        <div class="blog__item__text">
+                            <ul class="blog__item__tags">
+                                <li><i class="fa fa-tags"></i>{{i.price}} AFS</li>
+                            </ul>
+                            <ul class="blog__item__widget">
+                                <li><i class="fa fa-phone"></i>{{i.phone}}</li>
+                                <!-- <li><i class="fa fa-user"></i>{{i.owner}}</li> -->
+                                {% if user.is_superuser %}
+                                <li><form action="/delete"><button type="submit" class="primary-btn" id="delete" name="delete" value="{{i.id}}"><i class="fa fa-remove"></i>Delete</button></form></li>
+                                <li><form action="/sell"><button type="submit" class="primary-btn" id="sell" name="sell" value="{{i.id}}"><i class="fa fa-download"></i>Sell</button></form></li>
+                                {% else %}
+                                <li><i class="fa fa-user"></i>{{i.owner}}</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            {% endfor %}
+    <!-- Most Search Section End -->
+
+    <!-- Feature Location Section Begin -->
+    <section class="feature-location spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Top Featured Locations</h2>
+                        <p>Explore restaurants, bars, and cafés by locality</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <a href="#" class="feature__location__item large-item set-bg"
+                        data-setbg="{% static 'img/feature-location/fl-1.jpg' %}">
+                        <div class="feature__location__item__text">
+                            <h5>Washington, D.C</h5>
+                            <ul>
+                                <li>2045 Listings</li>
+                                <li>3648 Users</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <a href="#" class="feature__location__item set-bg"
+                                data-setbg="{% static 'img/feature-location/fl-2.jpg' %}">
+                                <div class="feature__location__item__text">
+                                    <h5>Chicago</h5>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <a href="#" class="feature__location__item set-bg"
+                                data-setbg="{% static 'img/feature-location/fl-3.jpg' %}">
+                                <div class="feature__location__item__text">
+                                    <h5>San Antonio</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#" class="feature__location__item set-bg" data-setbg="{% static 'img/feature-location/fl-4.jpg' %}">
+                        <div class="feature__location__item__text">
+                            <h5>Los Angeles</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Feature Location Section End -->
+
+    <!-- Blog Section Begin -->
+    <div class="section layout_padding padding_bottom-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="full">
+                        <div class="heading_main text_align_center">
+                           <h2><span>News</span></h2>
+                        </div>
+                      </div>
+                </div>
+              </div>
+               <div class="row">
+                <div class="col-lg-12">
+                    <div id="demo" class="carousel slide" data-ride="carousel">                        
+                        <!-- The slideshow -->
+                        <form action="/map/edit">
+                            <button class="primary-btn" id="edit" value="{{user.id}}" style="border: 0px"><i class="fa fa-edit"></i></button>
+                        </form>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        {% for d in data %}
+                                        {% if user.id == d.fifth %}
+                                       <div class="full blog_img_popular">
+                                          <img class="img-responsive" src="{{d.image.url}}" alt="#" />
+                                          <h4>{{d.price}} AFS</h4>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        {% for i in data %}
+                                       <div class="full blog_img_popular">
+                                          <img class="img-responsive" src="{{i.image.url}}" alt="#" />
+                                          <h4>{{i.price}} AFS</h4>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                       {% for s in data %}
+                                       <div class="full blog_img_popular">
+                                          <img class="img-responsive" src="{{s.image.url}}" alt="#" />
+                                          <h4>{{s.price}} AFS</h4>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        {% for a in data %}
+                                       <div class="full blog_img_popular">
+                                          <img class="img-responsive" src="{{a.image.url}}" alt="#" />
+                                          <h4>{{a.price}} AFS</h4>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>            
+           </div>
+        </div>
+    <!-- Blog Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer__about">
+                        <p>Challenging the way things have always been done can lead to creative new options that reward
+                            you.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1 col-md-6">
+                    <div class="footer__address">
+                        <ul>
+                            <li>
+                                <span>Call Us:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Email:</span>
+                                <p>{{user.email}}</p>
+                            </li>
+                            <li>
+                                <span>Fax:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Connect Us:</span>
+                                <div class="footer__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-skype"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>            
+                    <div class="col-lg-3 offset-lg-1 col-md-6">
+                        <div class="footer__widget">
+                            {% if user.is_superuser %}
+                            <a href="/map/edit" class="primary-btn" id="edit"><i class="fa fa-edit"></i></a>
+                            {% endif %}                            
+<!--                             <div class="meta" style="float: left;">
+                                <button id="alert-error-with-buttons" class="bordered">Try out!</button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved|</p>
+                        </div>
+                        <div class="footer__copyright__links">
+                            <a href="#">Terms</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'js/jquery.barfiller.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'slide/js/jquery.min.js' %}"></script>
+    <script src="{% static 'slide/js/popper.min.js' %}"></script>
+    <script src="{% static 'slide/js/bootstrap.min.js' %}"></script>
+    <!-- ALL PLUGINS -->
+    <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+    <script src="{% static 'alert/js/jquery.min.js' %}"></script>
+    <script src="{% static 'alert/js/jquery.sweet-modal.min.js' %}"></script>
+        <script>
+            $(document).ready(function() {
+                var variants = {
+                    'alert': {
+                        args: [
+                            'This is an alert.'
+                        ]
+                    },
+
+                    'alert-success': {
+                        args: [
+                            {
+                                content: 'Successfully added',
+                                icon: $.sweetModal.ICON_SUCCESS
+                            }
+                        ]
+                    },
+
+                    'alert-warning': {
+                        args: [
+                            {
+                                content: 'This is a warning.',
+                                icon: $.sweetModal.ICON_WARNING,
+                            }
+                        ]
+                    },
+
+                    'alert-error-with-buttons': {
+                        args: [
+                            {
+                                content: 'This is an error.',
+                                title: 'Oh noes…',
+                                icon: $.sweetModal.ICON_ERROR,
+
+                                buttons: [
+                                    {
+                                        label: 'That\'s fine',
+                                        classes: 'redB'
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+
+                    'alert-with-title': {
+                        args: [
+                            'Titled Alert',
+                            'This is an alert.'
+                        ]
+                    },
+
+                    'confirm': {
+                        fn: $.sweetModal.confirm,
+
+                        args: [
+                            'Confirm please?',
+
+                            function() {
+                                $.sweetModal('Thanks for confirming!');
+                            }
+                        ]
+                    },
+
+                    'confirm-with-title': {
+                        fn: $.sweetModal.confirm,
+
+                        args: [
+                            'Titled Confirm',
+                            'Confirm please?',
+                            function() {
+                                $.sweetModal('Thanks for confirming!');
+                            }, function() {
+                                $.sweetModal('You declined. That\'s okay!');
+                            }
+                        ]
+                    },
+
+                    'prompt': {
+                        fn: $.sweetModal.prompt,
+
+                        args: [
+                            'Can I haz cheezeburger?',
+                            null,
+                            null,
+                            function(val) {
+                                $.sweetModal('You typed: ' + val);
+                            }
+                        ]
+                    },
+
+                    'prompt-with-value': {
+                        fn: $.sweetModal.prompt,
+
+                        args: [
+                            'Can I haz cheezeburger?',
+                            'Can I?',
+                            'Nope',
+                            function(val) {
+                                $.sweetModal('You typed: ' + val);
+                            }
+                        ]
+                    },
+
+                    'tabbed': {
+                        args: [
+                            {
+                                title: {
+                                    tab1: {
+                                        label: 'Tab 1'
+                                    },
+
+                                    tab2: {
+                                        label: 'Tab 2'
+                                    }
+                                },
+
+                                content: {
+                                    tab1: 'Tab 1',
+                                    tab2: 'Tab 2'
+                                }
+                            }
+                        ]
+                    },
+
+                    'tabbed-with-buttons': {
+                        args: [
+                            {
+                                title: {
+                                    tab1: {
+                                        label: 'Tab 1'
+                                    },
+
+                                    tab2: {
+                                        label: 'Tab 2'
+                                    }
+                                },
+
+                                content: {
+                                    tab1: 'Tab 1',
+                                    tab2: 'Tab 2'
+                                },
+
+                                buttons: {
+                                    someOtherAction: {
+                                        label: 'Action 2',
+                                        classes: 'secondaryB bordered flat',
+                                        action: function() {
+                                            return $.sweetModal('You clicked Action 2!');
+                                        }
+                                    },
+
+                                    someAction: {
+                                        label: 'Action 1',
+                                        classes: '',
+                                        action: function() {
+                                            return $.sweetModal('You clicked Action 1!');
+                                        }
+                                    },
+                                }
+                            }
+                        ]
+                    },
+
+                    'tabbed-with-icons': {
+                        args: [
+                            {
+                                title: {
+                                    tab1: {
+                                        label: 'Tab 1',
+                                        icon: '<svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#000000" d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" /></svg>'
+                                    },
+
+                                    tab2: {
+                                        label: 'Tab 2',
+                                        icon: '<svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#000000" d="M12,17L7,12H10V8H14V12H17L12,17M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L5,8.09V15.91L12,19.85L19,15.91V8.09L12,4.15Z" /></svg>'
+                                    }
+                                },
+
+                                content: {
+                                    tab1: 'Tab 1',
+                                    tab2: 'Tab 2'
+                                }
+                            }
+                        ]
+                    },
+
+                    'html-content': {
+                        args: [
+                            {
+                                title: 'HTML Content',
+                                content: 'You can place <b>anything</b> <i>you</i> want in here.'
+                            }
+                        ]
+                    },
+
+                    'html-content-dark': {
+                        args: [
+                            {
+                                title: 'HTML Content',
+                                content: 'You can place <b>anything</b> <i>you</i> want in here.',
+                                theme: $.sweetModal.THEME_DARK
+                            }
+                        ]
+                    },
+
+                    'youtube': {
+                        args: [
+                            {
+                                title: 'Will YouTube Ever Run Out Of Video IDs?',
+                                content: 'https://www.youtube.com/watch?v=gocwRvLhDf8',
+                                theme: $.sweetModal.THEME_DARK
+                            }
+                        ]
+                    }
+                };
+
+                for (var key in variants) {
+                    if (variants.hasOwnProperty(key)) {
+                        var variant = variants[key];
+
+                        $('#' + key).on('click', { variant: variant }, function(e) {
+                            var variant = e.data.variant;
+
+                            variant.fn = variant.fn || $.sweetModal;
+                            variant.fn.apply(this, variant.args);
+                        });
+                    }
+                }
+            });
+        </script>    
+    <script>
+    /* counter js */
+
+(function ($) {
+    $.fn.countTo = function (options) {
+        options = options || {};
+        
+        return $(this).each(function () {
+            // set options for current element
+            var settings = $.extend({}, $.fn.countTo.defaults, {
+                from:            $(this).data('from'),
+                to:              $(this).data('to'),
+                speed:           $(this).data('speed'),
+                refreshInterval: $(this).data('refresh-interval'),
+                decimals:        $(this).data('decimals')
+            }, options);
+            
+            // how many times to update the value, and how much to increment the value on each update
+            var loops = Math.ceil(settings.speed / settings.refreshInterval),
+                increment = (settings.to - settings.from) / loops;
+            
+            // references & variables that will change with each update
+            var self = this,
+                $self = $(this),
+                loopCount = 0,
+                value = settings.from,
+                data = $self.data('countTo') || {};
+            
+            $self.data('countTo', data);
+            
+            // if an existing interval can be found, clear it first
+            if (data.interval) {
+                clearInterval(data.interval);
+            }
+            data.interval = setInterval(updateTimer, settings.refreshInterval);
+            
+            // initialize the element with the starting value
+            render(value);
+            
+            function updateTimer() {
+                value += increment;
+                loopCount++;
+                
+                render(value);
+                
+                if (typeof(settings.onUpdate) == 'function') {
+                    settings.onUpdate.call(self, value);
+                }
+                
+                if (loopCount >= loops) {
+                    // remove the interval
+                    $self.removeData('countTo');
+                    clearInterval(data.interval);
+                    value = settings.to;
+                    
+                    if (typeof(settings.onComplete) == 'function') {
+                        settings.onComplete.call(self, value);
+                    }
+                }
+            }
+            
+            function render(value) {
+                var formattedValue = settings.formatter.call(self, value, settings);
+                $self.html(formattedValue);
+            }
+        });
+    };
+    
+    $.fn.countTo.defaults = {
+        from: 0,               // the number the element should start at
+        to: 0,                 // the number the element should end at
+        speed: 1000,           // how long it should take to count between the target numbers
+        refreshInterval: 100,  // how often the element should be updated
+        decimals: 0,           // the number of decimal places to show
+        formatter: formatter,  // handler for formatting the value before rendering
+        onUpdate: null,        // callback method for every time the element is updated
+        onComplete: null       // callback method for when the element finishes updating
+    };
+    
+    function formatter(value, settings) {
+        return value.toFixed(settings.decimals);
+    }
+}(jQuery));
+
+jQuery(function ($) {
+  // custom formatting example
+  $('.count-number').data('countToOptions', {
+    formatter: function (value, options) {
+      return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+    }
+  });
+  
+  // start all the timers
+  $('.timer').each(count);  
+  
+  function count(options) {
+    var $this = $(this);
+    options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+    $this.countTo(options);
+  }
+});
+    </script>
+</body>
+
+</html>

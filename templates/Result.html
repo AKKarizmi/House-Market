@@ -1,0 +1,368 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Directing Template">
+    <meta name="keywords" content="Directing, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PYPYPER</title>
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/barfiller.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">   
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="{% static 'img/logo.png' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9">
+                    <div class="header__nav">
+                        <nav class="header__menu mobile-menu">
+                            <ul>
+                                <li><a href="/index">Home</a></li>
+                                <li><a href="/map/list">List</a></li>
+                                {% if not user.is_superuser %}
+                                <li><a href="/map/report">Navigations</a></li>
+                                {% endif %}
+                                {% if user.is_superuser %}
+                                <li><a href="">Reports</a></li>
+                                <li><a href="#">Edits</a>
+                                    <ul class="dropdown">
+                                        <li><a href="map/edit">Home Page</a></li>
+                                        <li><a href="./listing-details.html">Lists</a></li>
+                                        <li><a href="./blog-details.html">Users</a></li>
+                                        <li><a href="./contact.html">Earnings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/map/user_detail">Users</a></li>
+                                
+                                {% else %}
+                                <li><a href="/map/profile">Profile</a></li>
+                                {% endif %}
+                                <li><a href="#">About US</a></li>
+                                <li><a href="/users/logout">Logout</a></li>
+                            </ul>
+                        </nav>
+                        <div class="header__menu__right">
+                            <a href="/map/upload" class="primary-btn"><i class="fa fa-upload"></i> Add</a>
+                            <a href="/map/register" class="login-btn"><i class="fa fa-user"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Hero Section Begin -->
+<!--     <section class="hero set-bg" data-setbg="{% static 'img/about.jpg' %}" style="padding-top: 80px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="hero__text">
+                        <div class="section-title">
+                        </div>
+                        <div class="hero__search__form">
+                            <form action="/search" method="GET">
+                                
+                                <div class="select__option">
+                                    <select name="floors">
+                                        <optgroup title="Choose Categories">
+                                            <option value="">Floors</option>
+                                            {% for f in home %}
+                                            <option>{{f.floors}}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="select__option">
+                                    <select name="location">
+                                        <optgroup title="Choose Location">
+                                            <option value="">Choose Location</option>
+                                            {% for l in home %}
+                                            <option>{{l.location}}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="select__option">
+                                    <select name="rooms">
+                                        <optgroup title="Choose Room">
+                                            <option value="">Choose Rooms</option>
+                                            {% for r in home %}
+                                            <option>{{r.rooms}}</option>
+                                            {% endfor %}
+                                        </optgroup>                                        
+                                    </select>
+                                </div>
+                                <div class="select__option">
+                                    <select name="price">
+                                        <optgroup title="Choose Price">
+                                            <option value="">Choose Price</option>
+                                            {% for p in home %}
+                                            <option>{{p.price}}</option>
+                                            {% endfor %}
+                                        </optgroup>                                        
+                                    </select>
+                                </div>
+                                <button type="submit" style="width: 110px">Explore</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ -->    <!-- Hero Section End -->
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Most Search Section Begin -->
+    <section class="most-search spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Result for your search</h2>
+                    </div>
+                </div>
+            </div>
+<!--             <div class="row">
+                <div class="col-lg-12">
+                    <div class="most__search__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
+                                    <span class="flaticon-039-fork"></span>
+                                    Restaurent
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
+                                    <span class="flaticon-030-kebab"></span>
+                                    Shopping
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
+                                    <span class="flaticon-032-food-truck"></span>
+                                    Travel
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">
+                                    <span class="flaticon-017-croissant"></span>
+                                    Beauty
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab">
+                                    <span class="flaticon-038-take-away"></span>
+                                    Event
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">
+                                    <span class="flaticon-031-delivery"></span>
+                                    Rental
+                                </a>
+                            </li>
+                        </ul>
+                    </div> -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="listing__item">
+                                        {% for i in find %}
+                                        <div class="listing__item__pic set-bg" data-setbg="{{i.image.url}}">
+                                            <!-- <img src="{% static 'img/listing/list_icon-1.png' %}" alt=""> -->
+                                            <div class="listing__item__pic__tag">Popular</div>
+                                        </div>
+                                        <div class="listing__item__text">
+                                            <div class="listing__item__text__inside">
+                                                <h5>{{i.rooms}}</h5>
+                                                <div class="listing__item__text__rating">
+                                                    <h6>{{i.price}}</h6>
+                                                </div>
+                                                <ul>
+                                                    <li><span class="icon_pin_alt" id="l"></span>{{i.location}}</li>
+                                                    <li><span class="icon_phone" id="l"></span>{{i.phone}}</li>
+                                                    <li><span class="fa fa-user"></span>{{i.owner}}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Most Search Section End -->
+
+    <!-- Blog Section Begin -->
+    <section class="news-post spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Suggestions</h2>
+                        <p>Here are some suggestions for you</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic set-bg" data-setbg="{% static 'img/blog/blog-1.jpg' %}">
+                            <a href="{% static 'https://www.youtube.com/watch?v=8EJ3zbKTWQ8" class="play-btn video-popup"><i class="fa fa-play"></i></a>
+                        </div>
+                        <div class="blog__item__text">
+                            <ul class="blog__item__tags">
+                                <li><i class="fa fa-tags"></i> Travel</li>
+                                <li>Videos</li>
+                            </ul>
+                            <h5><a href="#">Internet Banner Advertising Most Reliable</a></h5>
+                            <ul class="blog__item__widget">
+                                <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
+                                <li><i class="fa fa-user"></i> John Smith</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic set-bg" data-setbg="{% static 'img/blog/blog-2.jpg' %}"></div>
+                        <div class="blog__item__text">
+                            <ul class="blog__item__tags">
+                                <li><i class="fa fa-tags"></i> Travel</li>
+                                <li>Restaurant</li>
+                            </ul>
+                            <h5><a href="#">Internet Banner Advertising Most Reliable</a></h5>
+                            <ul class="blog__item__widget">
+                                <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
+                                <li><i class="fa fa-user"></i> John Smith</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic set-bg" data-setbg="{% static 'img/blog/blog-3.jpg' %}"></div>
+                        <div class="blog__item__text">
+                            <ul class="blog__item__tags">
+                                <li><i class="fa fa-tags"></i> Travel</li>
+                                <li>Restaurant</li>
+                            </ul>
+                            <h5><a href="#">Internet Banner Advertising Most Reliable</a></h5>
+                            <ul class="blog__item__widget">
+                                <li><i class="fa fa-clock-o"></i> 19th March, 2019</li>
+                                <li><i class="fa fa-user"></i> John Smith</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer__about">
+                        <p>Challenging the way things have always been done can lead to creative new options that reward
+                            you.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1 col-md-6">
+                    <div class="footer__address">
+                        <ul>
+                            <li>
+                                <span>Call Us:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Email:</span>
+                                <p>info.colorlib@gmail .com</p>
+                            </li>
+                            <li>
+                                <span>Fax:</span>
+                                <p>(+12) 345-678-910</p>
+                            </li>
+                            <li>
+                                <span>Connect Us:</span>
+                                <div class="footer__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-skype"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved|</p>
+                        </div>
+                        <div class="footer__copyright__links">
+                            <a href="#">Terms</a>
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'js/jquery.barfiller.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
